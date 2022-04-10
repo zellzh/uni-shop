@@ -13,5 +13,7 @@
 </script>
 
 <style lang="scss">
-	
+image{
+  vertical-align: bottom;
+}
 </style>
