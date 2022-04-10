@@ -13,7 +13,12 @@
 </script>
 
 <style lang="scss">
-image{
-  vertical-align: bottom;
+page{
+  width: 100%;
+  height: 100%;
+  
+  image{
+    vertical-align: bottom;
+  }
 }
 </style>
