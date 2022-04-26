@@ -1,5 +1,9 @@
 <template>
   <view class="home-container">
+    <!-- 搜索区域 -->
+    <view class="search">
+      <search class="search"></search>
+    </view>
     <!-- 轮播图区域 -->
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" 
             :duration="1000" :circular="true">
@@ -56,6 +60,10 @@
       };
     },
     methods: {
+      // 点击搜索栏
+      searchHandler() {
+        console.log('触发click');
+      },
       // 获取轮播图
       getSwiperList() {
         uni.$http.get('/api/public/v1/home/swiperdata')
@@ -113,6 +121,13 @@
 </script>
 
 <style lang="scss">
+.home-container {
+  // 搜索栏
+  .search {
+    position: sticky; // sticky 不会脱离文档流
+    top: 0;
+    z-index: 999;
+  }
   // swiper 区域
   swiper {
     width: 100%;
@@ -171,4 +186,5 @@
       }
     }
   }
+}
 </style>

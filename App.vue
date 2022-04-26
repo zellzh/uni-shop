@@ -20,5 +20,9 @@ page{
   image{
     vertical-align: bottom;
   }
+  
+  view{
+    box-sizing: border-box;
+  }
 }
 </style>

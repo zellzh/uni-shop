@@ -17,7 +17,8 @@ App.mpType = 'app'
  * axios 配置  
  */
 axios.defaults.adapter = mpAdapter
-axios.defaults.baseURL = 'https://api-ugo-web.itheima.net'
+// 注意点: 微信真机调试不检验合法域名只能使用 http, https 不行
+axios.defaults.baseURL = 'http://api-ugo-web.itheima.net'
 uni.$http= axios
 uni.$showMsg = showMsg
 
