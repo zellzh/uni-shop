@@ -21,7 +21,7 @@
           <view class="lv2-item">/ {{item1.cat_name}} /</view>
           <view class="lv3-box">
             <navigator class="lv3-item" v-for="(item2, i) in item1.children" :key='item2.cat_id'
-                      :url="`/subpkg/goods_list/goods_list?id=${item2.cat_id}`">
+                      :url="`/subpkg/goods_list/goods_list?cid=${item2.cat_id}`">
               <image :src="item2.cat_icon" @error="imgError"></image>
               <text>{{item2.cat_name}}</text>
             </navigator>

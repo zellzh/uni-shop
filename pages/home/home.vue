@@ -2,7 +2,7 @@
   <view class="home-container">
     <!-- 搜索区域 -->
     <view class="search">
-      <search class="search"></search>
+      <search></search>
     </view>
     <!-- 轮播图区域 -->
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" 
