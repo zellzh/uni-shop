@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import { showMsg } from 'utils/util.js'
+import store from '@/store/store.js'
 
 // 导入第三方库
 // wx.request 封装 axios
@@ -39,7 +40,8 @@ axios.interceptors.response.use(res => {
 })
 
 const app = new Vue({
-    ...App
+    ...App,
+    store
 })
 app.$mount()
 // #endif

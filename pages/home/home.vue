@@ -5,7 +5,7 @@
       <search></search>
     </view>
     <!-- 轮播图区域 -->
-    <swiper :indicator-dots="true" :autoplay="true" :interval="3000" 
+    <swiper :indicator-dots="true" :autoplay="isPlay" :interval="3000" 
             :duration="1000" :circular="true">
       <swiper-item v-for="(item, i) in swiperList" :key='item.goods_id'>
         <navigator class="swiper-item" :url="`/subpkg/goods_detail/goods_detail?id=${item.goods_id}`">
@@ -51,9 +51,13 @@
 </template>
 
 <script>
+  import tabbarBadge from '@/mixins/tabbar_badge.js'
+  
   export default {
+    mixins: [tabbarBadge],
     data() {
       return {
+        isPlay: true,
         swiperList: [],
         navList: [],
         floorList: []
@@ -116,6 +120,12 @@
       this.getSwiperList()
       this.getNavList()
       this.getFloorList()
+    },
+    onShow() {
+      this.isPlay = true
+    },
+    onHide() {
+      this.isPlay = false
     }
   }
 </script>

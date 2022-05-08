@@ -1,16 +1,8 @@
 <template>
-  <view class="goodslist-container">
-    <navigator class="goods-item" v-for="(item, i) in goodslist" :key='item.goods_id'
-                :url="`/subpkg/goods_detail/goods_detail?id=${item.goods_id}`">
-      <view class="item-left">
-        <image :src="item.goods_small_logo || defaultPic" mode="" 
-               class="item-thumbnail" lazy-load></image>
-      </view>
-      <view class="item-right">
-        <text class="item-title">{{item.goods_name}}</text>
-        <text class="item-price">￥{{item.goods_price | price2Fixed}}</text>
-      </view>
-    </navigator>
+  <view class="goodslist-container" @click='go2detail'>
+    <block v-for="(item, i) in goodslist" :key="item.goods_id">
+      <goods-item :goods="item" :data-id='item.goods_id'></goods-item>
+    </block>
   </view>
 </template>
 
@@ -45,12 +37,12 @@
         this.total = this.total || message.total
         this.isloading = false
         cb && cb()
-      }
-    },
-    filters: {
-      // 价格格式过滤
-      price2Fixed(val) {
-        return (+val).toFixed(2)
+      },
+      go2detail(e) {
+        const goods_id = e.target.dataset.id
+        uni.navigateTo({
+          url: `/subpkg/goods_detail/goods_detail?id=${goods_id}`
+        })
       }
     },
     onLoad(opts) {
@@ -83,33 +75,4 @@
 .goodslist-container{
   
 }
-
-.goods-item{
-  display: flex;
-  padding: 20rpx 10rpx;
-  border-bottom: 1px solid #f0f0f0;
-}
-.item-left{
-  margin-right: 20rpx;
-  
-  .item-thumbnail{
-    width: 200rpx;
-    height: 200rpx;
-  }
-}
-.item-right{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  
-  > .item-title{
-    font-size: 13px;
-  }
-  > .item-price{
-    font-size: 16px;
-    color: #c00000;
-  }
-}
-
-
 </style>

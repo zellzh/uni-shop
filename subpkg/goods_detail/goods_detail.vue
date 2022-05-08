@@ -37,6 +37,9 @@
 </template>
 
 <script>
+  import {pickObj} from '@/utils/util.js'
+  import {mapActions, mapState} from 'vuex'
+  
   export default {
     data() {
       return {
@@ -49,11 +52,10 @@
         }, {
           icon: 'headphones',
           text: '客服',
-          info: 2
         }, {
           icon: 'cart',
           text: '购物车',
-          info: 2
+          info: 0
         }],
         // 右侧按钮配置
         buttonGroup: [{
@@ -69,7 +71,19 @@
         ]
       }
     },
+    computed: {
+      ...mapState('cart', ['cart'])
+    },
+    watch: {
+      cart: {
+        immediate: true, 
+        handler(newV) {
+          this.options.find(x => x.text === '购物车').info = newV.length
+        }
+      }
+    },
     methods: {
+      ...mapActions('cart', ['operateCart']),
       // 获取数据详情
       async getGoodsDetail(goods_id) {
         const {
@@ -136,8 +150,16 @@
       // 导航右侧点击
       buttonClick(e) {
         const type = e.content.text
+        // 过滤商品信息进购物车
+        const cartItem = pickObj(this.goodsInfo, [
+          'goods_id', 'goods_name', 'goods_price', 'goods_count', 'goods_small_logo', 'goods_state'
+        ])
+        cartItem.goods_count = 1
+        cartItem.goods_state = true
+        
         if (type === '加入购物车') {
-          console.log('加入购物车');
+          // 加入购物车
+          this.operateCart({cartItem, tag: 'add'})
         } else {
           console.log('立即购买');
         }

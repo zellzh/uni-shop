@@ -18,7 +18,7 @@ page{
   height: 100%;
   
   image{
-    vertical-align: bottom;
+    display: block;
   }
   
   view{
