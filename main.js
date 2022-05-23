@@ -28,6 +28,14 @@ axios.interceptors.request.use(config => {
   uni.showLoading({
     title: '数据加载中...'
   })
+  
+  // 支付接口需要验证 token
+  if (config.url.indexOf('/my/') !== -1) {
+    Object.assign(config.headers, {
+      // 字段的值可以直接从 vuex 中进行获取
+      Authorization: store.state.user.token,
+    })
+  }
   return config
 }, err => {
   return Promise.reject(err)
